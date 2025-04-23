@@ -2,6 +2,9 @@
 
 // Interface for a scene that can be shown in the application.
 struct Scene {
+protected:
+    ~Scene() = default;
+
 public:
     // Called when this scene is activated.
     virtual void OnEnable() = 0;
