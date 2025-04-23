@@ -7,7 +7,7 @@
 #include "imgui.h"
 void Assignment_1::OnEnable() {
     for (auto& circle : circles) {
-        circle.totalForce = gravity;
+        circle.AddForce(gravity);
     }
 
     circles[0].velocity = glm::vec2(2.5, -5.0);
@@ -24,6 +24,8 @@ void Assignment_1::Update(float deltaTime) {
         CollideLeftWall(leftWall, circle);
         CollideRightWall(rightWall, circle);
     }
+
+
 }
 
 void Assignment_1::Draw() {
@@ -53,8 +55,8 @@ void Assignment_1::CollideFloor(Line& line, Circle& circle) {
                         normalize((line.end - line.start)));
     auto point = line.start + glm::vec2(1, 0) * dot;
 
-    if (glm::distance(circle.position, point) < circle.radius + 0.01f) {
-        circle.position.y = point.y + (circle.radius + 0.02f);
+    if (glm::distance(circle.position, point) < circle.radius + 0.001f) {
+        circle.position.y = point.y + (circle.radius + 0.001f);
         circle.velocity.y *= -1.0f;
     }
 }
